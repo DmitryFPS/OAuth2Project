@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/test")
 public class testController {
-    @GetMapping("/work")
+    @GetMapping("/login")
     public String work() {
-        return "work";
+        return "login";
+    }
+
+    @GetMapping("/internal")
+    public String internal() {
+        return "internal";
     }
 }
