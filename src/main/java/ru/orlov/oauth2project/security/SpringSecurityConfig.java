@@ -17,8 +17,15 @@ public class SpringSecurityConfig {
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KCRoleConverter());
 
         http
-                .authorizeRequests().antMatchers("/api/test/login").permitAll()
-                .anyRequest().authenticated()
+//                .authorizeRequests()
+//                .antMatchers("/api/test/login").permitAll()
+//                .anyRequest().authenticated()
+
+                .authorizeRequests()
+                .antMatchers("/api/admin/*").hasRole("admin")
+                .antMatchers("/api/user/*").hasAnyRole("admin", "user")
+                .anyRequest()
+                .authenticated()
 
                 .and()
 

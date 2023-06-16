@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/test")
-public class testController {
+public class TestController {
     @GetMapping("/login")
     public String work() {
         return "login";
