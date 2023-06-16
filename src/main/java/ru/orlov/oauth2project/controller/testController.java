@@ -2,6 +2,8 @@ package ru.orlov.oauth2project.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,9 @@ public class testController {
 
     @GetMapping("/get")
     @PreAuthorize("hasRole('user') || hasRole('admin')")
-    public String get() {
-        return "Доступен всем пользователям у которых есть роль \"User\"";
+    public String get(@AuthenticationPrincipal final Jwt jwt) {
+        final String name = jwt.getClaim("name");
+        return "Доступен всем пользователям у которых есть роль \"User\", сам Юзер == " + name;
     }
 
     @PostMapping("/post")
